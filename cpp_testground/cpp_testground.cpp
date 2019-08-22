@@ -2,10 +2,20 @@
 //
 
 #include <iostream>
+using namespace std;
+
+int addition(int a, int b)
+{
+	int r;
+	r = a + b;
+	return r;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	int z;
+	z = addition(17, 25);
+	cout << "The result is " << z;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
