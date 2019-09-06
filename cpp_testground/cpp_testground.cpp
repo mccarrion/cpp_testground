@@ -4,18 +4,50 @@
 #include <iostream>
 using namespace std;
 
-int addition(int a, int b)
-{
-	int r;
-	r = a + b;
-	return r;
-}
+wstring tetromino[7];
 
 int main()
 {
-	int z;
-	z = addition(17, 25);
-	cout << "The result is " << z;
+	// Create assets
+	tetromino[0].append(L"..X.");
+	tetromino[0].append(L"..X.");
+	tetromino[0].append(L"..X.");
+	tetromino[0].append(L"..X.");
+
+	tetromino[1].append(L"..X.");
+	tetromino[1].append(L"..X.");
+	tetromino[1].append(L"..X.");
+	tetromino[1].append(L"..X.");
+
+	tetromino[2].append(L"..X.");
+	tetromino[2].append(L"..X.");
+	tetromino[2].append(L"..X.");
+	tetromino[2].append(L"..X.");
+
+	tetromino[3].append(L"..X.");
+	tetromino[3].append(L"..X.");
+	tetromino[3].append(L"..X.");
+	tetromino[3].append(L"..X.");
+
+	tetromino[4].append(L"..X.");
+	tetromino[4].append(L"..X.");
+	tetromino[4].append(L"..X.");
+	tetromino[4].append(L"..X.");
+
+	tetromino[5].append(L"..X.");
+	tetromino[5].append(L"..X.");
+	tetromino[5].append(L"..X.");
+	tetromino[5].append(L"..X.");
+	
+	tetromino[6].append(L"..X.");
+	tetromino[6].append(L"..X.");
+	tetromino[6].append(L"..X.");
+	tetromino[6].append(L"..X.");
+
+	tetromino[7].append(L"..X.");
+	tetromino[7].append(L"..X.");
+	tetromino[7].append(L"..X.");
+	tetromino[7].append(L"..X.");
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
