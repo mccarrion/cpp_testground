@@ -112,6 +112,11 @@ int main()
 
 	bool bGameOver = false;
 
+	int nCurrentPiece = 0;
+	int nCurrentRotation = 0;
+	int nCurrentX = nFieldWidth / 2;
+	int nCurrentY = 0;
+
 	while (!bGameOver) 
 	{
 		// GAME TIMING ======================================
@@ -127,7 +132,19 @@ int main()
 		{
 			for (int y = 0; y < nFieldHeight; y++)
 			{
-				screen[(y + 2) * nScreenWidth + (x + 2)] = L" ABCDEFG=#"[pField[y * nFieldWidth + x]];
+				screen[(y + 2)*nScreenWidth + (x + 2)] = L" ABCDEFG=#"[pField[y*nFieldWidth + x]];
+			}
+		}
+
+		// Draw Current Piece
+		for (int px = 0; px < 4; px++)
+		{
+			for (int py = 0; py < 4; py++)
+			{
+				if (tetromino[nCurrentPiece][Rotat(px, py, nCurrentRotation)] == L'X')
+				{
+					screen[(nCurrentY + py + 2)*nScreenWidth + (nCurrentX + px + 2)] = nCurrentPiece + 65;
+				}
 			}
 		}
 
