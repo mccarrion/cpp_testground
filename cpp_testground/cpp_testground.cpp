@@ -2,13 +2,14 @@
 //
 
 #include <iostream>
+#include <thread>
 #include <Windows.h>
 using namespace std;
 
 wstring tetromino[7];
 int nFieldWidth = 12;
 int nFieldHeight = 18;
-unsigned char* pField = nullptr;
+unsigned char *pField = nullptr;
 
 int nScreenWidth = 80;		// Console Screen Size X (columns)
 int nScreenHeight = 30;		// Console Screen Size Y (rows)
@@ -117,12 +118,19 @@ int main()
 	int nCurrentX = nFieldWidth / 2;
 	int nCurrentY = 0;
 
+	bool bKey[4];
+
 	while (!bGameOver) 
 	{
 		// GAME TIMING ======================================
+		this_thread::sleep_for(50ms);
 
 		// INPUT ============================================
-
+		for (int k = 0; k < 4; k++)
+		{														// R   L   D Z
+			bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28Z"[k]))) != 0;
+		}
+		
 		// GAME LOGIC =======================================
 
 		// RENDER OUTPUT ====================================
@@ -141,7 +149,7 @@ int main()
 		{
 			for (int py = 0; py < 4; py++)
 			{
-				if (tetromino[nCurrentPiece][Rotat(px, py, nCurrentRotation)] == L'X')
+				if (tetromino[nCurrentPiece][Rotate(px, py, nCurrentRotation)] == L'X')
 				{
 					screen[(nCurrentY + py + 2)*nScreenWidth + (nCurrentX + px + 2)] = nCurrentPiece + 65;
 				}
