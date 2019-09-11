@@ -100,13 +100,16 @@ int main()
 	{
 		for (int y = 0; y < nFieldHeight; y++)
 		{
-			pField[y * nFieldWidth + x] = (x == 0 || x == nFieldWidth - 1 || y == nFieldHeight - 1) ? 9 : 0;
+			pField[y*nFieldWidth + x] = (x == 0 || x == nFieldWidth - 1 || y == nFieldHeight - 1) ? 9 : 0;
 		}
 	}
 
 	// For drawing on screen
 	wchar_t* screen = new wchar_t[nScreenWidth * nScreenHeight];
-	for (int i = 0; i < nScreenWidth * nScreenHeight; i++) screen[i] = L' ';
+	for (int i = 0; i < nScreenWidth * nScreenHeight; i++)
+	{
+		screen[i] = L' ';
+	}
 	HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	SetConsoleActiveScreenBuffer(hConsole);
 	DWORD dwBytesWritten = 0;
@@ -119,6 +122,7 @@ int main()
 	int nCurrentY = 0;
 
 	bool bKey[4];
+	bool bRotateHold = false;
 
 	while (!bGameOver) 
 	{
@@ -132,6 +136,19 @@ int main()
 		}
 		
 		// GAME LOGIC =======================================
+		nCurrentX += (bKey[0] && DoesPieceFit(nCurrentPiece, nCurrentRotation, nCurrentX + 1, nCurrentY)) ? 1 : 0;
+		nCurrentX -= (bKey[1] && DoesPieceFit(nCurrentPiece, nCurrentRotation, nCurrentX - 1, nCurrentY)) ? 1 : 0;
+		nCurrentX += (bKey[2] && DoesPieceFit(nCurrentPiece, nCurrentRotation, nCurrentX, nCurrentY + 1)) ? 1 : 0;
+
+		if (bKey[3])
+		{
+			nCurrentRotation += (!bRotateHold && DoesPieceFit(nCurrentPiece, nCurrentRotation + 1, nCurrentX, nCurrentY)) ? 1 : 0;
+			bRotateHold = true;
+		}
+		else
+		{
+			bRotateHold = false;
+		}
 
 		// RENDER OUTPUT ====================================
 
