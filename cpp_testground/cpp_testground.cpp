@@ -124,10 +124,16 @@ int main()
 	bool bKey[4];
 	bool bRotateHold = false;
 
+	int nSpeed = 20;
+	int nSpeedCounter = 0;
+	bool bForceDown = false;
+
 	while (!bGameOver) 
 	{
 		// GAME TIMING ======================================
-		this_thread::sleep_for(50ms);
+		this_thread::sleep_for(50ms); // Game Tick
+		nSpeedCounter++;
+		bForceDown = (nSpeedCounter == nSpeed);
 
 		// INPUT ============================================
 		for (int k = 0; k < 4; k++)
@@ -148,6 +154,40 @@ int main()
 		else
 		{
 			bRotateHold = false;
+		}
+
+		if (bForceDown)
+		{
+			if (DoesPieceFit(nCurrentPiece, nCurrentRotation, nCurrentX, nCurrentY + 1)) 
+			{
+				nCurrentY++;
+			}
+			else
+			{
+				// Lock the current piece in the field
+				for (int px = 0; px < 4; px++)
+				{
+					for (int py = 0; py < 4; py++)
+					{
+						if (tetromino[nCurrentPiece][Rotate(px, py, nCurrentRotation)] != L'.')
+						{
+							pField[(nCurrentY + py) * nFieldWidth + (nCurrentX + px)] = nCurrentPiece + 1;
+						}
+					}
+				}
+
+
+				// Check have we got any lines
+
+				// Choose next piece
+				nCurrentX = nFieldWidth / 2;
+				nCurrentY = 0;
+				nCurrentRotation = 0;
+				nCurrentPiece = rand() % 7;
+
+				// if piece does not fit
+				bGameOver = !DoesPieceFit(nCurrentPiece, nCurrentRotation, nCurrentX, nCurrentY);
+			}
 		}
 
 		// RENDER OUTPUT ====================================
