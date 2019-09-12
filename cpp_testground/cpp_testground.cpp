@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <thread>
+#include <vector>
 #include <Windows.h>
 using namespace std;
 
@@ -128,6 +129,8 @@ int main()
 	int nSpeedCounter = 0;
 	bool bForceDown = false;
 
+	vector<int> vLines;
+
 	while (!bGameOver) 
 	{
 		// GAME TIMING ======================================
@@ -178,6 +181,28 @@ int main()
 
 
 				// Check have we got any lines
+				for (int py = 0; py < 4; py++)
+				{
+					if (nCurrentY + py < nFieldHeight - 1)
+					{
+						bool bLine = true;
+						for (int px = 1; px < nFieldWidth - 1; px++)
+						{
+							bLine &= (pField[(nCurrentY + py) * nFieldWidth + px]) != 0;
+						}
+
+						if (bLine)
+						{
+							// Remove Line, set to =
+							for (int px = 1; px < nFieldWidth - 1; px++)
+							{
+								pField[(nCurrentY + py) * nFieldWidth + px] = 8;
+							}
+
+							vLines.push_back(nCurrentY + py);
+						}
+					}
+				}
 
 				// Choose next piece
 				nCurrentX = nFieldWidth / 2;
@@ -188,6 +213,8 @@ int main()
 				// if piece does not fit
 				bGameOver = !DoesPieceFit(nCurrentPiece, nCurrentRotation, nCurrentX, nCurrentY);
 			}
+
+			nSpeedCounter = 0;
 		}
 
 		// RENDER OUTPUT ====================================
@@ -211,6 +238,13 @@ int main()
 					screen[(nCurrentY + py + 2)*nScreenWidth + (nCurrentX + px + 2)] = nCurrentPiece + 65;
 				}
 			}
+		}
+
+		if (!vLines.empty())
+		{
+			// Display Frame to draw lines
+			WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth* nScreenHeight, { 0,0 }, & dwBytesWritten);
+			this_thread::sleep_for(400ms); // Delay a bit
 		}
 
 		// Display frame
