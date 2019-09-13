@@ -245,6 +245,20 @@ int main()
 			// Display Frame to draw lines
 			WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth* nScreenHeight, { 0,0 }, & dwBytesWritten);
 			this_thread::sleep_for(400ms); // Delay a bit
+
+			for (auto& v : vLines)
+			{
+				for (int px = 1; px < nFieldWidth - 1; px++)
+				{
+					for (int py = v; py > 0; py--)
+					{
+						pField[py * nFieldWidth + px] = pField[(py - 1) * nFieldWidth + px];
+					}
+					pField[px] = 0;
+				}
+			}
+
+			vLines.clear();
 		}
 
 		// Display frame
