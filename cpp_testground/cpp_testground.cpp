@@ -129,6 +129,7 @@ int main()
 	int nSpeedCounter = 0;
 	bool bForceDown = false;
 	int nPieceCount = 0;
+	int nScore = 0;
 
 	vector<int> vLines;
 
@@ -210,6 +211,9 @@ int main()
 					}
 				}
 
+				nScore += 25;
+				if (!vLines.empty()) nScore += (1 << vLines.size()) * 100;
+
 				// Choose next piece
 				nCurrentX = nFieldWidth / 2;
 				nCurrentY = 0;
@@ -246,6 +250,9 @@ int main()
 			}
 		}
 
+		// Draw Score
+		swprintf_s(&screen[2 * nScreenWidth + nFieldHeight + 6], 16, L"SCORE: %8d", nScore);
+
 		if (!vLines.empty())
 		{
 			// Display Frame to draw lines
@@ -270,6 +277,11 @@ int main()
 		// Display frame
 		WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
 	}
+
+	// Game over screen
+	CloseHandle(hConsole);
+	cout << "Game Over! Score:" << nScore << endl;
+	system("pause");
 
 	return 0;
 }
