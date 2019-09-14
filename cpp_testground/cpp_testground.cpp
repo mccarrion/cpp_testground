@@ -128,6 +128,7 @@ int main()
 	int nSpeed = 20;
 	int nSpeedCounter = 0;
 	bool bForceDown = false;
+	int nPieceCount = 0;
 
 	vector<int> vLines;
 
@@ -177,6 +178,11 @@ int main()
 							pField[(nCurrentY + py) * nFieldWidth + (nCurrentX + px)] = nCurrentPiece + 1;
 						}
 					}
+				}
+
+				nPieceCount++;
+				if (nPieceCount % 10 == 0) {
+					if (nSpeed >= 10) nSpeed--;
 				}
 
 
