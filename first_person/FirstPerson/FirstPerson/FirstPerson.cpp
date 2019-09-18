@@ -16,6 +16,7 @@ int nMapHeight = 16;
 int nMapWidth = 16;
 
 float fFOV = 3.14159 / 4.0;
+float fDepth = 16;
 
 int main()
 {
@@ -53,6 +54,35 @@ int main()
 		{
 			// For each column, calculate the projected ray angle into world space
 			float fRayAngle = (fPlayerA - fFOV / 2.0f) + ((float)x / (float)nScreenWidth) * fFOV;
+
+			float fDistanceToWall = 0;
+			bool bHitWall = false;
+
+			float fEyeX = sinf(fRayAngle); // Unit vector for ray in player space
+			float fEyeY = cosf(fRayAngle);
+
+			while (!bHitWall && fDistanceToWall < fDepth)
+			{
+				fDistanceToWall += 0.1f;
+
+				int nTestX = (int)(fPlayerX + fEyeX * fDistanceToWall);
+				int nTestY = (int)(fPlayerY + fEyeY * fDistanceToWall);
+
+				// Test if ray is out of bounds
+				if (nTestX < 0 || nTestX >= nMapWidth || nTestY < 0 || nTestY >= nMapHeight)
+				{
+					bHitWall = true;		// Just set distance to maximum depth
+					fDistanceToWall = fDepth;
+				}
+				else
+				{
+					// Ray is inbounds so test to see if the ray cell is a wall block
+					if (map[nTestY * nMapWidth + nTestX] == '#')
+					{
+						bHitWall = true;
+					}
+				}
+			}
 		}
 
 		screen[nScreenWidth * nScreenHeight - 1] = '\0';
