@@ -83,6 +83,10 @@ int main()
 					}
 				}
 			}
+
+			// Calculate distance to ceiling and floor
+			int nCeiling = (float)(nScreenHeight / 2.0) - nScreenHeight / ((float)fDistanceToWall);
+			int nFloor = nScreenHeight - nCeiling;
 		}
 
 		screen[nScreenWidth * nScreenHeight - 1] = '\0';
