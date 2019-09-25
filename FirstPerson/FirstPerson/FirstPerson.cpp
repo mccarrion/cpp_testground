@@ -145,6 +145,12 @@ int main()
 
 						// Sort pairs from closest to farthest
 						sort(p.begin(), p.end(), [](const pair<float, float>& left, const pair<float, float>& right) {return left.first < right.first; });
+
+						float fBound = 0.01;
+						if (acos(p.at(0).second) < fBound) bBoundary = true;
+						if (acos(p.at(1).second) < fBound) bBoundary = true;
+						if (acos(p.at(2).second) < fBound) bBoundary = true;
+
 					}
 				}
 			}
@@ -155,26 +161,13 @@ int main()
 
 			short nShade = ' ';
 
-			if (fDistanceToWall <= fDepth / 4.0f)
-			{
-				nShade = 0x2588;	// Very close
-			}
-			else if (fDistanceToWall < fDepth / 3.0f)
-			{
-				nShade = 0x2593;
-			}
-			else if (fDistanceToWall < fDepth / 2.0f)
-			{
-				nShade = 0x2592;
-			}
-			else if (fDistanceToWall < fDepth)
-			{
-				nShade = 0x2591;
-			}
-			else
-			{
-				nShade = ' ';		// Too far away
-			}
+			if (fDistanceToWall <= fDepth / 4.0f)		nShade = 0x2588;	// Very close
+			else if (fDistanceToWall < fDepth / 3.0f)	nShade = 0x2593;
+			else if (fDistanceToWall < fDepth / 2.0f)	nShade = 0x2592;
+			else if (fDistanceToWall < fDepth)			nShade = 0x2591;
+			else										nShade = ' ';		// Too far away
+
+			if (bBoundary)		nShade = ' ';  // Black out boundary
 
 			for (int y = 0; y < nScreenHeight; y++)
 			{
