@@ -2,10 +2,25 @@
 //
 
 #include <iostream>
+using namespace std;
+
+#include "olcNoiseMaker.h"
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "Synthesizer Tutorial" << endl;
+
+	// Get all sound hardware
+	vector<wstring> devices = olcNoiseMaker<short>::Enumerate();
+
+	// Display findings
+	for (auto d : devices) wcout << "Found Output Device:" << d << endl;
+
+	// Create sound machine!!
+	olcNoiseMaker<short> sound(devices[0]);
+
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
