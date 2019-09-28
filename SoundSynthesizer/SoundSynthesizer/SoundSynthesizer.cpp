@@ -6,6 +6,10 @@ using namespace std;
 
 #include "olcNoiseMaker.h"
 
+double MakeNoise(double dTime)
+{
+	return 0.5 * sin(880.0 * 2 * 3.14159 * dTime);
+}
 
 int main()
 {
@@ -18,7 +22,10 @@ int main()
 	for (auto d : devices) wcout << "Found Output Device:" << d << endl;
 
 	// Create sound machine!!
-	olcNoiseMaker<short> sound(devices[0]);
+	olcNoiseMaker<short> sound(devices[0], 44100, 1, 8, 512);
+
+	// Link noise function with sound machine
+	sound.SetUserFunction(MakeNoise);
 
 	return 0;
 }
