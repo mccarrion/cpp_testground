@@ -8,7 +8,7 @@ using namespace std;
 
 double MakeNoise(double dTime)
 {
-	return 0.5 * sin(880.0 * 2 * 3.14159 * dTime);
+	return 0.5 * sin(220.0 * 2 * 3.14159 * dTime);
 }
 
 int main()
