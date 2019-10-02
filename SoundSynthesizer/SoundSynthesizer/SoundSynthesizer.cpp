@@ -40,15 +40,24 @@ int main()
 	// Link noise function with sound machine
 	sound.SetUserFunction(MakeNoise);
 
+	double dOctaveBaseFrequency = 110.0; // A2
+	double d12thRootOf2 = pow(2.0, 1.0 / 12.0);
+
 	while (1)
 	{
-		// Add a keyboard
+		// Add a keyboard like a piano
 
-		if (GetAsyncKeyState('A') & 0x8000)
+		bool bKeyPressed = false;
+		for (int k = 0; k < 15; k++)
 		{
-			dFrequencyOutput = 440.0;
+			if (GetAsyncKeyState((unsigned char)("ZSXCFVGBNJMK\xbcL\xbe\xbf"[k])) & 0x8000)
+			{
+				dFrequencyOutput = dOctaveBaseFrequency * pow(d12thRootOf2, 12);
+				bKeyPressed = true;
+			}
 		}
-		else
+
+		if (!bKeyPressed)
 		{
 			dFrequencyOutput = 0.0;
 		}
