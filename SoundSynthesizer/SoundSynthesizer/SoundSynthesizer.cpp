@@ -13,15 +13,12 @@ double MakeNoise(double dTime)
 {
 	double dOutput = 1.0 * sin(dFrequencyOutput * 2 * 3.14159 * dTime);
 	
-	if (dOutput > 0.0)
-	{
-		return 0.2;
-	}
-	else
-	{
-		return -0.2;
-	}
+	return dOutput * 0.5;
 
+	/*
+	if (dOutput > 0.0)		return 0.2;
+	else					return -0.2;
+	*/
 }
 
 int main()
