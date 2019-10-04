@@ -6,12 +6,31 @@ using namespace std;
 
 #include "olcNoiseMaker.h"
 
-atomic<double> dFrequencyOutput = 0.0;
+// Converts frequency (Hz) to angular velocity
+double w(double dHertz)
+{
+	return dHertz * 2.0 * PI;
+}
 
+double osc(double dHertz, double dTime, int nType)
+{
+
+	switch (nType)
+	{
+	case 0:
+		return sin(w(dHertz) * dTime);
+	default:
+		return 0.0;
+	}
+}
+
+atomic<double> dFrequencyOutput = 0.0;
+double dOctaveBaseFrequency = 110.0; // A2
+double d12thRootOf2 = pow(2.0, 1.0 / 12.0);
 
 double MakeNoise(double dTime)
 {
-	double dOutput = 1.0 * sin(dFrequencyOutput * 2 * 3.14159 * dTime);
+	double dOutput = 1.0 * sin(w(dFrequencyOutput) * dTime);
 	
 	return dOutput * 0.5;
 
