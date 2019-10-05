@@ -19,6 +19,8 @@ double osc(double dHertz, double dTime, int nType)
 	{
 	case 0:
 		return sin(w(dHertz) * dTime);
+	case 1:
+		return sin(w(dHertz) * dTime) > 0.0 ? 1.0 : -1.0;
 	default:
 		return 0.0;
 	}
