@@ -17,10 +17,12 @@ double osc(double dHertz, double dTime, int nType)
 
 	switch (nType)
 	{
-	case 0:
+	case 0: // Sine Wave
 		return sin(w(dHertz) * dTime);
-	case 1:
+	case 1: // Square Wave
 		return sin(w(dHertz) * dTime) > 0.0 ? 1.0 : -1.0;
+	case 2: // Triangle Wave
+		return asin(sin(w(dHertz) * dTime)) * 2.0 / PI;
 	default:
 		return 0.0;
 	}
@@ -32,7 +34,7 @@ double d12thRootOf2 = pow(2.0, 1.0 / 12.0);
 
 double MakeNoise(double dTime)
 {
-	double dOutput = 1.0 * sin(w(dFrequencyOutput) * dTime);
+	double dOutput = osc(dFrequencyOutput, dTime, 0);
 	
 	return dOutput * 0.5;
 
