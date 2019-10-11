@@ -23,6 +23,17 @@ double osc(double dHertz, double dTime, int nType)
 		return sin(w(dHertz) * dTime) > 0.0 ? 1.0 : -1.0;
 	case 2: // Triangle Wave
 		return asin(sin(w(dHertz) * dTime)) * 2.0 / PI;
+	case 3: // Saw wave (analogue / warm / slow)
+	{
+		double dOutput = 0.0;
+
+		for (double n = 1.0; n < 100.0; n++)
+			dOutput += (sin(n * w(dHertz) * dTime)) / n;
+
+		return dOutput * (2.0 / PI);
+	}
+	case 4: // Saw Wave (optimised / harsh / fast)
+		return (2.0 / PI) * (dHertz * PI * fmod(dTime, 1.0 / dHertz) - (PI / 2.0));
 	default:
 		return 0.0;
 	}
