@@ -34,7 +34,7 @@ double d12thRootOf2 = pow(2.0, 1.0 / 12.0);
 
 double MakeNoise(double dTime)
 {
-	double dOutput = osc(dFrequencyOutput, dTime, 0);
+	double dOutput = osc(dFrequencyOutput, dTime, 1);
 	
 	return dOutput * 0.5;
 
