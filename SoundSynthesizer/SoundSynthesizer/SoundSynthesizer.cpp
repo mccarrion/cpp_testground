@@ -34,6 +34,8 @@ double osc(double dHertz, double dTime, int nType)
 	}
 	case 4: // Saw Wave (optimised / harsh / fast)
 		return (2.0 / PI) * (dHertz * PI * fmod(dTime, 1.0 / dHertz) - (PI / 2.0));
+	case 5: // Pseudo Random Noise
+		return 2.0 * ((double)rand() / (double)RAND_MAX) - 1.0;
 	default:
 		return 0.0;
 	}
