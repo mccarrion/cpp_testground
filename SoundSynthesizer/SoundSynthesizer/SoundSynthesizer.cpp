@@ -41,6 +41,42 @@ double osc(double dHertz, double dTime, int nType)
 	}
 }
 
+struct sEnvelopeADSR
+{
+	double dAttackTime;
+	double dDecayTime;
+	double dReleaseTime;
+
+	double dSustainAmplitude;
+	double dStartAmplitude;
+
+	double dTriggerOnTime;
+	double dTriggerOffTime;
+
+	sEnvelopeADSR()
+	{
+		dAttackTime = 0.01;
+		dDecayTime = 0.01;
+		dStartAmplitude = 1.0;
+		dSustainAmplitude = 0.8;
+		dReleaseTime = 0.02;
+		dTriggerOnTime = 0.0;
+		dTriggerOffTime = 0.0;
+	}
+
+	double GetAmplitude(double dTime)
+	{
+		double dAmplitude = 0.0;
+
+		return dAmplitude;
+	}
+
+	void NoteOn(double dTimeOn)
+	{
+
+	}
+};
+
 atomic<double> dFrequencyOutput = 0.0;
 double dOctaveBaseFrequency = 110.0; // A2
 double d12thRootOf2 = pow(2.0, 1.0 / 12.0);
