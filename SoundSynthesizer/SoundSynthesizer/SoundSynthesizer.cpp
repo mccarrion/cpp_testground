@@ -53,6 +53,8 @@ struct sEnvelopeADSR
 	double dTriggerOnTime;
 	double dTriggerOffTime;
 
+	bool bNoteOn;
+
 	sEnvelopeADSR()
 	{
 		dAttackTime = 0.01;
@@ -62,6 +64,7 @@ struct sEnvelopeADSR
 		dReleaseTime = 0.02;
 		dTriggerOnTime = 0.0;
 		dTriggerOffTime = 0.0;
+		bNoteOn = false;
 	}
 
 	double GetAmplitude(double dTime)
@@ -73,7 +76,14 @@ struct sEnvelopeADSR
 
 	void NoteOn(double dTimeOn)
 	{
+		dTriggerOnTime = dTimeOn;
+		bNoteOn = true;
+	}
 
+	void NoteOff(double dTimeOff)
+	{
+		dTriggerOffTime = dTimeOff;
+		bNoteOn = false;
 	}
 };
 
