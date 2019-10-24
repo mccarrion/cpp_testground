@@ -70,6 +70,24 @@ struct sEnvelopeADSR
 	double GetAmplitude(double dTime)
 	{
 		double dAmplitude = 0.0;
+		double dLifeTime = dTime - dTriggerOnTime;
+		
+		if (bNoteOn)
+		{
+			// ADS
+
+			// Attack
+			if (dLifeTime <= dAttackTime)
+				dAmplitude = (dLifeTime / dAttackTime) * dStartAmplitude;
+
+			// Decay
+			if (dLifeTime > dAttackTime && dLifeTime <= (dAttackTime + dDecayTime))
+				dAmplitude = ((dLifeTime - dAttackTime) / dDecayTime);
+		}
+		else
+		{
+			// R
+		}
 
 		return dAmplitude;
 	}
