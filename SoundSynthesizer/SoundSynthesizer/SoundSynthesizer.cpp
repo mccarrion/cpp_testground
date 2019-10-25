@@ -82,7 +82,13 @@ struct sEnvelopeADSR
 
 			// Decay
 			if (dLifeTime > dAttackTime && dLifeTime <= (dAttackTime + dDecayTime))
-				dAmplitude = ((dLifeTime - dAttackTime) / dDecayTime);
+				dAmplitude = ((dLifeTime - dAttackTime) / dDecayTime) * (dSustainAmplitude - dStartAmplitude) + dStartAmplitude;
+
+			// Sustain
+			if (dLifeTime > (dAttackTime + dDecayTime))
+			{
+				dAmplitude = dSustainAmplitude;
+			}
 		}
 		else
 		{
