@@ -92,7 +92,13 @@ struct sEnvelopeADSR
 		}
 		else
 		{
-			// R
+			// Release
+			dAmplitude = ((dTime - dTriggerOffTime) / dReleaseTime) * (0.0 - dSustainAmplitude) + dSustainAmplitude;
+		}
+
+		if (dAmplitude <= 0.0001)
+		{
+			dAmplitude = 0;
 		}
 
 		return dAmplitude;
