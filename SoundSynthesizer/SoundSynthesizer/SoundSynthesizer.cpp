@@ -57,11 +57,11 @@ struct sEnvelopeADSR
 
 	sEnvelopeADSR()
 	{
-		dAttackTime = 0.01;
+		dAttackTime = 0.1;
 		dDecayTime = 0.01;
 		dStartAmplitude = 1.0;
 		dSustainAmplitude = 0.8;
-		dReleaseTime = 0.02;
+		dReleaseTime = 0.2;
 		dTriggerOnTime = 0.0;
 		dTriggerOffTime = 0.0;
 		bNoteOn = false;
@@ -120,10 +120,11 @@ struct sEnvelopeADSR
 atomic<double> dFrequencyOutput = 0.0;
 double dOctaveBaseFrequency = 110.0; // A2
 double d12thRootOf2 = pow(2.0, 1.0 / 12.0);
+sEnvelopeADSR envelope;
 
 double MakeNoise(double dTime)
 {
-	double dOutput = osc(dFrequencyOutput, dTime, 1);
+	double dOutput = envelope.GetAmplitude(dTime) * osc(dFrequencyOutput, dTime, 1);
 	
 	return dOutput * 0.5;
 
@@ -162,6 +163,7 @@ int main()
 			if (GetAsyncKeyState((unsigned char)("ZSXCFVGBNJMK\xbcL\xbe\xbf"[k])) & 0x8000)
 			{
 				dFrequencyOutput = dOctaveBaseFrequency * pow(d12thRootOf2, 12);
+				envelope.NoteOn(sound.GetTime());
 				bKeyPressed = true;
 			}
 		}
@@ -169,6 +171,7 @@ int main()
 		if (!bKeyPressed)
 		{
 			dFrequencyOutput = 0.0;
+			envelope.NoteOff(sound.GetTime());
 		}
 	}
 
