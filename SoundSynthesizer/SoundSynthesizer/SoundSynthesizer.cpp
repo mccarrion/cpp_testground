@@ -69,7 +69,7 @@ struct sEnvelopeADSR
 
 	double GetAmplitude(double dTime)
 	{
-		double dAmplitude = 0.0;
+		double dAmplitude = 0.0; 
 		double dLifeTime = dTime - dTriggerOnTime;
 		
 		if (bNoteOn)
