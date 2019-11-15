@@ -8,6 +8,10 @@ use amethyst::{
     utils::application_root_dir,
 };
 
+mod pong;
+
+use crate::pong::Pong;
+
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
     
