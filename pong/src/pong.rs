@@ -60,3 +60,24 @@ impl Paddle {
 impl Component for Paddle {
     type Storage = DenseVecStorage<Self>;
 }
+
+fn initialize_paddles(world: &mut World) {
+    let mut left_transform = Transform::default();
+    let mut right_transform = Transform::default();
+
+    let y = ARENA_HEIGHT / 2.0;
+    left_transform.set_translation_xyz(PADDLE_WIDTH * 0.5, y, 0.0);
+    right_transform.set_translation_xyz(ARENA_WIDTH - PADDLE_WIDTH * 0.5, y, 0.0);
+
+    world
+        .create_entity()
+        .with(Paddle::new(Side::Left))
+        .with(left_transform)
+        .build();
+
+    world
+        .create_entity()
+        .with(Paddle::new(Side::Right))
+        .with(right_transform)
+        .build();
+}
