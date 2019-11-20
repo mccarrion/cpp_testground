@@ -26,13 +26,13 @@ fn main() -> amethyst::Result<()> {
      * RenderFlat2D is used to render entities with `SpriteRender` component
      */
     let game_data = GameDataBuilder::default()
-        .with_bundle(
+        /* .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
             .with_plugin(
                 RenderToWindow::from_config_path(display_config_path)
                     .with_clear([0.0, 0.0, 0.0, 1.0]),
             )
-            .with_plugin(RenderFlat2D::default()))
+            .with_plugin(RenderFlat2D::default())) */
         .with_bundle(TransformBundle::new())?;
     
     let assets_dir = app_root.join("assets");

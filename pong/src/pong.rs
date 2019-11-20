@@ -90,3 +90,22 @@ fn initialize_paddles(world: &mut World) {
         .with(right_transform)
         .build();
 }
+
+/**
+ * Loads the sprite sheet for the paddles
+ */
+fn load_sprite_sheet(world: &mut World) -> Handle<SpriteSheet> {
+    /**
+     * Load the sprite sheet necessary to render the graphics. Texture is 
+     * the pixel data and `texture_handle` is a cloneable reference to texture
+     */
+    let texture_handle = {
+        let loader = world.read_resource::<Loader>();
+        let texture_storage = world.read_resource::<AssetStorage<Texture>>();
+        loader.load(
+            "texture/pong_spritesheet.png",
+            ImageFormat::default(),
+            &texture_storage,
+        )
+    };
+}
