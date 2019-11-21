@@ -67,9 +67,15 @@ impl Component for Paddle {
 /**
  * Initializes one paddle on the left and one paddle on the right
  */
-fn initialize_paddles(world: &mut World) {
+fn initialize_paddles(world: &mut World, sprite_sheet: Handle<SpriteSheet>) {
     let mut left_transform = Transform::default();
     let mut right_transform = Transform::default();
+
+    // Assign the sprites for the paddles
+    let sprite_render = SpriteRender {
+        sprite_sheet: sprite_sheet.clone(),
+        sprite_number: 0, // paddle is the first sprite in the sprite_sheet
+    };
 
     // Correctly position the paddles
     let y = ARENA_HEIGHT / 2.0;
@@ -79,6 +85,7 @@ fn initialize_paddles(world: &mut World) {
     // Create a left plank entity
     world
         .create_entity()
+        .with(sprite_render.clone())
         .with(Paddle::new(Side::Left))
         .with(left_transform)
         .build();
@@ -86,6 +93,7 @@ fn initialize_paddles(world: &mut World) {
     // Create a right plank entity
     world
         .create_entity()
+        .with(sprite_render.clone())
         .with(Paddle::new(Side::Right))
         .with(right_transform)
         .build();
@@ -108,4 +116,16 @@ fn load_sprite_sheet(world: &mut World) -> Handle<SpriteSheet> {
             &texture_storage,
         )
     };
+}
+
+fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
+    let world = data.world;
+
+    // Load the spritesheet necessary to render the graphics.
+    let sprite_sheet_handle = load_sprite_sheet(world);
+
+    world.register::<Paddle>();
+
+    initialise_paddles(world, sprite_sheet_handle);
+    initialize_camera(world);
 }
