@@ -118,6 +118,9 @@ fn load_sprite_sheet(world: &mut World) -> Handle<SpriteSheet> {
     };
 }
 
+/**
+ * Loads up the paddles on the start of the game.
+ */
 fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
     let world = data.world;
 
