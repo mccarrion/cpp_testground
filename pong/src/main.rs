@@ -1,5 +1,6 @@
 use amethyst::{
     core::transform::TransformBundle,
+    input::{InputBundle, StringBindings},
     prelude::*,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
@@ -12,6 +13,17 @@ use amethyst::{
 mod pong;
 
 use crate::pong::Pong;
+
+let binding_path = app_root.join("config").join("bindings.ron");
+let input_bundle = InputBundle::<StringBindings>::new()
+    .with_bindings_from_file(binding_path)?;
+let mut world = World::new();
+let game_data = GameDataBuilder::default()
+    .with_bundle(TransformBundle::new())?
+    .with_bundle(input_bundle)?;
+let mut game = Application::new(assets_dir, Pong, game_data)?;
+
+game.run();
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
