@@ -38,14 +38,16 @@ fn main() -> amethyst::Result<()> {
      * RenderFlat2D is used to render entities with `SpriteRender` component
      */
     let game_data = GameDataBuilder::default()
-        /* .with_bundle(
-            RenderingBundle::<DefaultBackend>::new()
-            .with_plugin(
-                RenderToWindow::from_config_path(display_config_path)
-                    .with_clear([0.0, 0.0, 0.0, 1.0]),
-            )
-            .with_plugin(RenderFlat2D::default())) */
-        .with_bundle(TransformBundle::new())?;
+        // .with_bundle(
+        // RenderingBundle::<DefaultBackend>::new()
+        // .with_plugin(
+        //     RenderToWindow::from_config_path(display_config_path)
+        //         .with_clear([0.0, 0.0, 0.0, 1.0]),
+        // )
+        // .with_plugin(RenderFlat2D::default()))
+        .with_bundle(TransformBundle::new())?
+        .with_bundle(input_bundle)?
+        .with(systems::PaddleSystem, "paddle_system", &["input_system"]);
     
     let assets_dir = app_root.join("assets");
     let mut world = World::new();
