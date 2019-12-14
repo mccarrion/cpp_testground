@@ -127,8 +127,6 @@ fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
     // Load the spritesheet necessary to render the graphics.
     let sprite_sheet_handle = load_sprite_sheet(world);
 
-    world.register::<Paddle>();
-
     initialise_paddles(world, sprite_sheet_handle);
     initialize_camera(world);
 }
