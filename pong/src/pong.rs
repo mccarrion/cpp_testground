@@ -56,6 +56,28 @@ impl Component for Ball {
     type Storage = DenseVecStorage<Self>;
 }
 
+fn initialise_ball(world: &mut World, sprite_sheet_handle: Handle<SpriteSheet>) {
+    // Create the translation.
+    let mut local_transform = Transform::default();
+    local_transform.set_translation_xyz(ARENA_WIDTH / 2.0, ARENA_HEIGHT / 2.0, 0.0);
+
+    // Assign the sprite for the ball
+    let sprite_render = SpriteRender {
+        sprite_sheet: sprite_sheet_handle,
+        sprite_number: 1, // ball is the second sprite on the sprite sheet
+    };
+
+    world
+        .create_entity()
+        .with(sprite_render)
+        .with(Ball {
+            radius: BALL_RADIUS,
+            velocity: [BALL_VELOCITY_X, BALL_VELOCITY_Y],
+        })
+        .with(local_transform)
+        .build();
+}
+
 pub struct Paddle {
     pub side: Side,
     pub width: f32,
@@ -139,6 +161,7 @@ fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
     // Load the spritesheet necessary to render the graphics.
     let sprite_sheet_handle = load_sprite_sheet(world);
 
+    initialise_ball(world, sprite_sheet_handle.clone());
     initialise_paddles(world, sprite_sheet_handle);
     initialize_camera(world);
 }
