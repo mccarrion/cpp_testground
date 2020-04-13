@@ -21,7 +21,7 @@ let mut world = World::new();
 let game_data = GameDataBuilder::default()
     .with_bundle(TransformBundle::new())?
     .with_bundle(input_bundle)?;
-let mut game = Application::new(assets_dir, Pong, game_data)?;
+let mut game = Application::new(assets_dir, Pong::default(), game_data)?;
 
 game.run();
 
