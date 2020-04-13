@@ -1,6 +1,8 @@
 pub use self::paddle::PaddleSystem;
+pub use self::winner::WinnerSystem;
 
 mod paddle;
+mod winner;
 
 let game_data = GameDataBuilder::default()
     // other systems
