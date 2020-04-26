@@ -8,9 +8,9 @@ Rating system for tutorials: Awesome > Great > Good
 ## C++ Tutorials
 | Tutorial Name | Link to Tutorial | Date Finished | Rating |
 | --- | --- | --- | --- |
-| javidx9 Sound Synthesizer | [SoundSynthesizer](https://www.youtube.com/watch?v=tgamhuQnOkM) | 10/28/2020 | Good |
-| javidx9 First Person Shooter | [FirstPerson](https://www.youtube.com/watch?v=xW8skO7MFYw) | 09/25/2019 | Awesome |
-| javidx9 Tetris|  [tetris](https://www.youtube.com/watch?v=8OK8_tHeCIA) | 09/13/2019 | Great |
+| javidx9 Sound Synthesizer | [Sound Synthesizer](https://www.youtube.com/watch?v=tgamhuQnOkM) | 10/28/2020 | Good |
+| javidx9 First Person Shooter | [First Person](https://www.youtube.com/watch?v=xW8skO7MFYw) | 09/25/2019 | Awesome |
+| javidx9 Tetris|  [Tetris](https://www.youtube.com/watch?v=8OK8_tHeCIA) | 09/13/2019 | Great |
 
 ## Non-C++ Tutorials
 | Tutorial Name | Programming Language |Link to Tutorial | Date Finished | Rating |
