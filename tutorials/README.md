@@ -1,10 +1,9 @@
 # Tutorials
-This subsection of the repository contains all code for completed tutorials. A list of all tutorials completed can be 
-found below. Periodically, some tutorials will be deleted to prevent repository from growing too large. Please follow 
-links to respective codebases for each tutorial to review their license if you wish to use their code for commercial 
-purposes.
+This subsection of the repository contains code for a recent tutorial. A list of all tutorials completed can be 
+found below. Please follow links to respective codebases for each tutorial to review their license if you wish to use 
+their code for commercial purposes.
 
-Rating system: Awesome > Great > Good
+Rating system for tutorials: Awesome > Great > Good
 
 ## C++ Tutorials
 | Tutorial Name | Link to Tutorial | Date Finished | Rating |
