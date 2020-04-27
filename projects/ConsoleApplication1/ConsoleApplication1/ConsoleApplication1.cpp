@@ -2,22 +2,18 @@
 //
 
 #include <iostream>
+#include "Calculator.h"
 
-double add(double a, double b)
-{
-	return a + b;
-}
-
-double subtract(double c, double d)
-{
-	return c - d;
-}
 
 int main()
 {
-	double x = add(2, 4);
-	double y = subtract(2, 4);
-    std::cout << "Hello World!\n" << x << "\n" << y;
+	Calculator calculator;
+	double x = calculator.add(2, 4);
+	double y = calculator.subtract(2, 4);
+	double i = calculator.multiply(2, 4);
+	double j = calculator.divide(2, 4);
+    std::cout << "Hello World!\n" << x << "\n" << y << "\n";
+	std::cout << i << "\n" << j;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
