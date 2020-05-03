@@ -3,17 +3,19 @@
 
 #include <iostream>
 #include "Calculator.h"
+#include "Magic8Ball.h"
 
 
 int main()
 {
-	Calculator calculator;
-	double x = calculator.add(2, 4);
-	double y = calculator.subtract(2, 4);
-	double i = calculator.multiply(2, 4);
-	double j = calculator.divide(2, 4);
-    std::cout << "Hello World!\n" << x << "\n" << y << "\n";
-	std::cout << i << "\n" << j;
+	// Question is not used by fortune method. Exists to allow user input 
+	// before the Magic8Ball provides a random response
+	std::string question;
+
+	Magic8Ball magic8ball;
+    std::cout << "Please ask a question in order to know your fortune:\n";
+	std::cin >> question;
+	std::cout << "Magic 8 ball says... " << magic8ball.fortune(question);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
