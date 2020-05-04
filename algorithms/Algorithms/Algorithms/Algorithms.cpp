@@ -2,20 +2,7 @@
 //
 
 #include <iostream>
-
-/*
- * Algorithm #1 a method to reverse a String.
- */
-std::string reverseString(std::string in)
-{
-	std::string out;
-	for (int i = in.length() - 1; i >= 0; i--)
-	{
-		std::string str(1, in.at(i));
-		out.append(str);
-	}
-	return out;
-}
+#include "StringAlgorithms.h"
 
 /*
  * The idea is to import any class in this solution that has various algorithms in them and 
@@ -23,6 +10,7 @@ std::string reverseString(std::string in)
  */
 int main()
 {
-	std::string hi = reverseString("!dlroW olleH");
+	StringAlgorithms stringAlgos;
+	std::string hi = stringAlgos.reverseString("!dlroW olleH");
     std::cout << hi;
 }
