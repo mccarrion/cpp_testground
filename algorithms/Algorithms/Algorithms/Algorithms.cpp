@@ -11,6 +11,6 @@
 int main()
 {
 	StringAlgorithms stringAlgos;
-	std::string hi = stringAlgos.reverseString("!dlroW olleH");
-    std::cout << hi;
+	int count = stringAlgos.countLetters("Hello there", 'e');
+    std::cout << count;
 }

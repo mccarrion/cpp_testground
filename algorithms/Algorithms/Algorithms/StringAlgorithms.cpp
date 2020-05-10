@@ -13,3 +13,16 @@ std::string StringAlgorithms::reverseString(std::string in)
 	}
 	return out;
 }
+
+int StringAlgorithms::countLetters(std::string sentence, char letter)
+{
+	int count = 0;
+	for (int i = 0; i < sentence.length(); i++)
+	{
+		if (letter == sentence.at(i))
+		{
+			count += 1;
+		}
+	}
+	return count;
+}
