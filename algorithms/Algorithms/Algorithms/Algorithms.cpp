@@ -2,7 +2,7 @@
 //
 
 #include <iostream>
-#include "StringAlgorithms.h"
+#include "ArrayAlgorithms.h"
 
 /*
  * The idea is to import any class in this solution that has various algorithms in them and 
@@ -10,7 +10,8 @@
  */
 int main()
 {
-	StringAlgorithms stringAlgos;
-	int count = stringAlgos.countLetters("Hello there", 'e');
-    std::cout << count;
+	ArrayAlgorithms arrayAlgos;
+	std::vector<int> nums = { 0, 1, 2, 0, 5, 2, 1 };
+	int index = arrayAlgos.dominantIndex(nums);
+    std::cout << index;
 }
